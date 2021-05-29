@@ -55,6 +55,14 @@ var surveyJSON = {
     "showCompletedPage": false,
 }
 
+function htmlEntities(str) {
+    return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
+function src(str) {
+    return `<a href="${htmlEntities(str)}">(src)</a>`;
+}
+
 var survey = new Survey.Model(surveyJSON);
 survey.onComplete.add(function(result, options) {
     console.log(result.data);
@@ -68,38 +76,80 @@ survey.onComplete.add(function(result, options) {
     let dif = [1, 3, 6, 7, 9, 13, 14].reduce(reducer, 0) / 7;
     let ddf = [2, 4, 11, 12, 17].reduce(reducer, 0) / 5;
     let eot = [5, 8, 10, 15, 16, 18, 19, 20].reduce(reducer, 0) / 8;
-    let totalMsg = "";
-    if (total <= 51) {
-        totalMsg = "non-Alexithymia"
-    } else if (total <= 60) {
-        totalMsg = "possible Alexithymia"
-    } else {
-        totalMsg = "Alexithymia"
-    }
     let res = document.querySelector("#surveyResult");
     res.hidden = false;
     res.innerHTML = `
-        I'm assuming you already have some sense of what Alexithymia is - if not, <a href="https://en.wikipedia.org/wiki/Alexithymia">go read Wikipedia</a>. 
-        Only the finest scholarly research here.
-        <br/> <br/>
-        Your total score is ${total} - that suggests ${totalMsg}. The score cutoffs are:
-        <ul>
-            <li>< 51: Non-Alexithymia</li>
-            <li>52-60: Possible Alexithymia</li>
-            <li>61+: Alexithymia</li>
-        </ul>
-        Your subscale scores are:
+        Your total score is ${total}. Your subscale scores are:
         <ul>
             <li>Difficulty Identifying Feelings (DIF): ${dif}</li>
             <li>Difficulty Describing Feelings (DDF): ${ddf}</li> 
             <li>Externally-Oriented Thinking (EOT): ${eot}</li>
         </ul>
-        But none of this is authoritative. Although there's some evidence that the TAS-20 still works digitally (doi: 10.1037/a0034316), 
-        this is a random quiz on the interwebz, and should not be taken too seriously. 
-        <br/> <br/>
-        If you're concerned and able, I recommend speaking with a therapist. 
-        Unfortunately, there isn't much material on Alexithymia outside of academic literature. 
+
+        Although Alexithymia is on a spectrum, researchers use arbitrary thresholds for convenience:
+        <ul>
+            <li>< 51: Non-Alexithymia</li>
+            <li>52-60: Possible Alexithymia</li>
+            <li>61+: Alexithymia</li>
+        </ul>
+        TAS-20 sourced from: ${src('https://embrace-autism.com/toronto-alexithymia-scale/')}
+
+        <p>
+        I am <b>not an expert</b>. I just skimmed some papers.
+        Unfortunately, there isn't a lot of information for laypeople - perhaps because this is still a fairly new concept. 
+        Any input is appreciated, preferrably as <a href="https://github.com/hahohihu/tas-20/issues">issues on Github</a>.
+        </p>
+
+        <p>
+        The TAS-20 is the standard tool for measuring Alexithymia - a personality trait literally translated as a "lack of words for emotions".
+        Someone with Alexithymia might feel their heart racing and start breathing short and fast, but not know why. 
+        Or even if they recognized it as - let's say fear, they may not know what they're afraid of.
+        </p>
+
+        <p>
+        There is some controversy over how best to define Alexithymia, resulting in a number of tools to measure it. The TAS-20 just measures three cognitive dimensions:
+        <ol>
+            <li>Difficulty identifying and differentiating feelings (DIF)</li>
+            <li>Difficulty describing feelings (DDF)</li>
+            <li>An externally oriented style of thinking (EOT), or a reduced tendency to reflect on feelings</li>
+        </ol>
+        DIF and DDF correlate strongly, but EOT is somewhat separate.
+        </p>
+
+        <p>
+        The BVAQ also measures two affective dimensions:
+        <ol>
+            <li>A reduced ability to fantasize, or imagine</li>
+            <li>Difficulty emotionalising - which is the ease or difficulty with which emotions are induced</li>
+        </ol>
+
+        The affective and cognitive dimensions don't correlate, and use different parts of the brain.
+        ${src('https://www.tandfonline.com/doi/full/10.1080/02699930601056989')} ${src('https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6124373/')}
+        </p>
+
+        <p>
+        The LEAS has yet another notion of it based on emotional awareness, based on levels of awareness from:
+        <ol>
+            <li>Physical sensations</li>
+            <li>Action tendencies</li>
+            <li>Single emotions</li>
+            <li>Blends of emotions</li>
+            <li>Blends of blends of emotions</li>
+        </ol>
+        And Alexithymia is then a failure in connecting the unconscious layers (1 & 2) with the conscious layers (3-5).
+
+        The TAS-20 and the LEAS don't correlate well, in part because the LEAS uses observers to assess subjects, in comparison to the TAS-20, which is self-reported.
+        ${src('https://pubmed.ncbi.nlm.nih.gov/15911914/')} ${src('https://www.frontiersin.org/articles/10.3389/fpsyg.2018.00453/full')}
+        </p>
+
+        <p>
+        And to conclude: internet surveys aren't reliable. I don't even know if this is the real TAS-20.
+        Self-report is also suspect - if you were extremely unaware, you could take the TAS-20 and come out "Non-Alexithymic". 
+        There are some contradictory findings around the TAS-20, probably because of that.
+        If you can, seeing a therapist or professional is always recommended.
+        </p>
         `;
+    $('html,body').scrollTop(0);
 });
 $("#surveyContainer").Survey({
     model: survey

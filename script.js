@@ -28,15 +28,30 @@ let ratings = questions.map(q => { return {
     name: q,
     minRateDescription: "Strongly Disagree",
     maxRateDescription: "Strongly Agree",
-    isRequired: true
+    // isRequired: true
 }});
 
 var surveyJSON = {
     "pages": [{
         "name": "page1",
-        "elements": ratings
+        "elements": [
+            {
+                "type": "html",
+                "name": "TAS-20",
+                "html": `
+                    <h2>TAS-20</h2>
+                    Please use this scale for the following questions: 
+                        <ol>
+                            <li>Strongly Disagree</li>
+                            <li>Disagree</li>
+                            <li>Neither Agree nor Disagree</li>
+                            <li>Agree</li>
+                            <li>Strongly Agree</li>
+                        </ol>
+                    `
+            }
+        ].concat(ratings)
     }],
-    "showQuestionNumbers": "off",
     "showCompletedPage": false,
 }
 
@@ -83,7 +98,7 @@ survey.onComplete.add(function(result, options) {
         this is a random quiz on the interwebz, and should not be taken too seriously. 
         <br/> <br/>
         If you're concerned and able, I recommend speaking with a therapist. 
-        Unfortunately, there isn't much material on it outside of academic literature. 
+        Unfortunately, there isn't much material on Alexithymia outside of academic literature. 
         `;
 });
 $("#surveyContainer").Survey({

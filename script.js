@@ -79,11 +79,11 @@ survey.onComplete.add(function(result, options) {
     let res = document.querySelector("#surveyResult");
     res.hidden = false;
     res.innerHTML = `
-        Your total score is ${total}. Your subscale scores are:
+        Your total score is ${total.toFixed(1)}. Your subscale scores are:
         <ul>
-            <li>Difficulty Identifying Feelings (DIF): ${dif}</li>
-            <li>Difficulty Describing Feelings (DDF): ${ddf}</li> 
-            <li>Externally-Oriented Thinking (EOT): ${eot}</li>
+            <li>Difficulty Identifying Feelings (DIF): ${dif.toFixed(1)}</li>
+            <li>Difficulty Describing Feelings (DDF): ${ddf.toFixed(1)}</li> 
+            <li>Externally-Oriented Thinking (EOT): ${eot.toFixed(1)}</li>
         </ul>
 
         Although Alexithymia is on a spectrum, researchers use arbitrary thresholds for convenience:

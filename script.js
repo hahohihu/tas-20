@@ -28,7 +28,7 @@ let ratings = questions.map(q => { return {
     name: q,
     minRateDescription: "Strongly Disagree",
     maxRateDescription: "Strongly Agree",
-    // isRequired: true
+    isRequired: true
 }});
 
 var surveyJSON = {

@@ -1,31 +1,49 @@
 Survey.StylesManager.applyTheme("modern");
 
+let questions = [
+    "I am often confused about what emotion I am feeling.", 
+    "It is difficult for me to find the right words for my feelings.",
+    "I have physical sensations that even doctors don’t understand.",
+    "I am able to describe my feelings easily.",
+    "I prefer to analyze problems rather than just describe them.",
+    "When I am upset. I don’t know if I am sad, frightened, or angry.",
+    "I am often puzzled by sensations in my body.",
+    "I prefer to just let things happen rather than to understand why they turned out that way.",
+    "I have feelings that I can’t quite identify.",
+    "Being in touch with emotions is essential.",
+    "I find it hard to describe how I feel about people.",
+    "People tell me to describe my feelings more.",
+    "I don’t know what’s going on inside me.",
+    "I often don’t know why I am angry.",
+    "I prefer talking to people about their daily activities rather than their feelings.",
+    "I prefer to watch “light” entertainment shows rather than psychological dramas.",
+    "It is difficult for me to reveal my innermost feelings. even to close friends.",
+    "I can feel close to someone, even in moments of silence.",
+    "I find examination of my feelings useful in solving personal problems.",
+    "I look for hidden meanings in movies or plays."
+];
+
+let ratings = questions.map(q => { return {
+    type: "rating",
+    name: q,
+    minRateDescription: "Strongly Disagree",
+    maxRateDescription: "Strongly Agree",
+    isRequired: true
+}});
+
 var surveyJSON = {
     "pages": [{
         "name": "page1",
-        "elements": [{
-            "type": "matrix",
-            "name": "TAS-20",
-            "columns": ["Strongly Disagree", "Disagree", "Neither Agree nor Disagree", "Agree", "Strongly Agree"],
-            "rows": ["I am often confused about what emotion I am feeling.", "It is difficult for me to find the right words for my feelings.", "I have physical sensations that even doctors don’t understand.", "I am able to describe my feelings easily.", "I prefer to analyze problems rather than just describe them.", "When I am upset. I don’t know if I am sad, frightened, or angry.", "I am often puzzled by sensations in my body.", "I prefer to just let things happen rather than to understand why they turned out that way.", "I have feelings that I can’t quite identify.", "Being in touch with emotions is essential.", "I find it hard to describe how I feel about people.", "People tell me to describe my feelings more.", "I don’t know what’s going on inside me.", "I often don’t know why I am angry.", "I prefer talking to people about their daily activities rather than their feelings.", "I prefer to watch “light” entertainment shows rather than psychological dramas.", "It is difficult for me to reveal my innermost feelings. even to close friends.", "I can feel close to someone, even in moments of silence.", "I find examination of my feelings useful in solving personal problems.", "I look for hidden meanings in movies or plays."],
-            "isAllRowRequired": true
-        }]
+        "elements": ratings
     }],
     "showQuestionNumbers": "off",
     "showCompletedPage": false,
 }
 
-let scores = {
-    "Strongly Disagree": 1, 
-    "Disagree": 2, 
-    "Neither Agree nor Disagree": 3, 
-    "Agree": 4,
-    "Strongly Agree": 5
-}
-
 var survey = new Survey.Model(surveyJSON);
 survey.onComplete.add(function(result, options) {
-    let answers = surveyJSON.pages[0].elements[0].rows.map(q => result.data["TAS-20"][q]).map(a => scores[a]);
+    console.log(result.data);
+    let answers = questions.map(q => result.data[q]);
     for (let i of [4, 5, 10, 18, 19]) {
         answers[i-1] = 6 - answers[i-1];
     }

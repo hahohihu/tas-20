@@ -60,7 +60,7 @@ function htmlEntities(str) {
 }
 
 function src(str) {
-    return `<a href="${htmlEntities(str)}">(src)</a>`;
+    return `<a href="${htmlEntities(str)}">(source)</a>`;
 }
 
 function formatNum(n) {
@@ -102,7 +102,8 @@ survey.onComplete.add(function(result, options) {
         <p>
         I am <b>not an expert</b>. I just skimmed some papers.
         Unfortunately, there isn't a lot of information for laypeople - perhaps because this is still a fairly new concept. 
-        Any input is appreciated, preferrably as <a href="https://github.com/hahohihu/tas-20/issues">issues on Github</a>.
+        Any input is appreciated, preferrably as <a href="https://github.com/hahohihu/tas-20/issues">issues on Github</a>. 
+        I've also tried to make this accessible, but have an able worldview - any feedback there is also appreciated.
         </p>
 
         <p>
@@ -112,44 +113,81 @@ survey.onComplete.add(function(result, options) {
         </p>
 
         <p>
-        There is some controversy over how best to define Alexithymia, resulting in a number of tools to measure it. The TAS-20 just measures three cognitive dimensions:
+        There are differences in the operational definition of Alexithymia, resulting in a number of tools to measure it. The TAS-20 just measures three cognitive dimensions:
         <ol>
             <li>Difficulty identifying and differentiating feelings (DIF)</li>
             <li>Difficulty describing feelings (DDF)</li>
             <li>An externally oriented style of thinking (EOT), or a reduced tendency to reflect on feelings</li>
         </ol>
-        DIF and DDF correlate strongly, but EOT is somewhat separate.
+        Within the TAS-20 model, there are three hypothesized types of Alexithymia:
+        <ol>
+            <li>General-high Alexithymia (GHA): high scores in all 3 subscales</li>
+            <li>Introvert-high Alexithymia (IHA): high scores in DIF and DDF, but low scores in EOT</li>
+            <li>Extrovert-high Alexithymia (EHA): high scores in EOT, low scores in DIF and DDF</li>
+        </ol>
+        Note: the stability of these has not been established ${src('https://bmcpsychiatry.biomedcentral.com/articles/10.1186/1471-244X-11-33')}.
         </p>
 
         <p>
         The BVAQ also measures two affective dimensions:
         <ol>
             <li>A reduced ability to fantasize, or imagine</li>
-            <li>Difficulty emotionalising - which is the ease or difficulty with which emotions are induced</li>
+            <li>Difficulty emotionalising - i.e. how easily emotionally inducing events arouse emotions</li>
         </ol>
-
-        The affective and cognitive dimensions don't correlate, and use different parts of the brain.
-        ${src('https://www.tandfonline.com/doi/full/10.1080/02699930601056989')} ${src('https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6124373/')}
+        The affective and cognitive dimensions don't correlate, and use different parts of the brain
+        ${src('https://www.tandfonline.com/doi/full/10.1080/02699930601056989')} ${src('https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6124373/')}.
         </p>
 
         <p>
-        The LEAS has yet another notion of it based on emotional awareness, based on levels of awareness from:
-        <ol>
-            <li>Physical sensations</li>
-            <li>Action tendencies</li>
-            <li>Single emotions</li>
-            <li>Blends of emotions</li>
-            <li>Blends of blends of emotions</li>
-        </ol>
-        And Alexithymia is then a failure in connecting the unconscious layers (1 & 2) with the conscious layers (3-5).
+        The LEAS was not designed with Alexithymia in mind, but is relevant because it takes a developmental model of emotional awareness:
+        <table id="leasTable">
+            <caption>Characteristics of Five Levels of Emotional Awareness</caption>
+            <tr>
+                <th scope="col">Level of Emotional Awareness</th>
+                <th scope="col">Subjective Quality of Emotional Experience</th>
+                <th scope="col">Differentiation of Emotion</th>
+            </tr>
 
-        The TAS-20 and the LEAS don't correlate well, in part because the LEAS uses observers to assess subjects, in comparison to the TAS-20, which is self-reported.
+            <tr>
+                <th scope="row">1. Sensorimotor reflexive</th>
+                <td>Bodily Sensation</td>
+                <td>Global undifferentiation of arousal</td>
+            </tr>
+
+            <tr>
+                <th scope="row">2. Sensorimotor enactive</th>
+                <td>Action tendency (e.g. urges) and/or global arousal</td>
+                <td>Action tendency or global hedonic state</td>
+            </tr>
+
+            <tr>
+                <th scope="row">3. Preoperational</th>
+                <td>Pervasive emotion (i.e. single emotion)</td>
+                <td>Either/or experience of emotional extremes (limited repertoire)</td>
+            </tr>
+
+            <tr>
+                <th scope="row">4. Concrete operational</th>
+                <td>Differentiated, attenuated emotion</td>
+                <td>Blends of emotions, concurrence of opposing emotions</td>
+            </tr>
+
+            <tr>
+                <th scope="row">5. Formal operational</th>
+                <td>Peak differentiation and blending</td>
+                <td>Richer differentiations of quality and intensity</td>
+            </tr>
+        </table>
+        <br/>
+        And Alexithymia can then be conceived as being in a drastically lower developmental stage than is expected. 
+        More information can be found here: ${src('https://pubmed.ncbi.nlm.nih.gov/3812780/')}.
+        The TAS-20 and the LEAS don't correlate well
         ${src('https://pubmed.ncbi.nlm.nih.gov/15911914/')} ${src('https://www.frontiersin.org/articles/10.3389/fpsyg.2018.00453/full')}
         </p>
 
         <p>
-        And to conclude: internet surveys aren't reliable. I don't even know if this is the real TAS-20.
-        Self-report is also suspect - if you were extremely unaware, you could take the TAS-20 and come out "Non-Alexithymic". 
+        And closing with a warning: internet surveys aren't reliable.
+        Self-report is also suspect - if you were extremely unaware, you could take the TAS-20 and have "Non-Alexithymia". 
         There are some contradictory findings around the TAS-20, probably because of that.
         If you can, seeing a therapist or professional is always recommended.
         </p>
